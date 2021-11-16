@@ -22,7 +22,7 @@ map('n', '<leader>pv', ':wincmd v<bar> :Ex <bar> :vertical resize 30<CR>')
 map('n', 'K', '<cmd>Lspsaga hover_doc<cr>')
 map('i', '<C-k>', '<cmd>Lspsaga hover_doc<cr>')
 map('n', 'gh', '<cmd>Lspsaga lsp_finder<cr>')
-map('n', '<C-e>', '<cmd>Lspsage show_line_diagnostics<CR>')
+map('n', '<C-e>', '<cmd>Lspsaga show_line_diagnostics<CR>')
 
 
 -- Telescope
@@ -32,7 +32,7 @@ map('n', "<leader>hh", "<cmd>Telescope help_tags<cr>")
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
 
 -- File explorer
-map('n', '<leader>e', '<cmd>NvimTreeOpen<cr>')
+map('n', '<leader>e', '<cmd>NvimTreeToggle<cr>')
 
 -- yank to the eol
 map('n', 'Y', 'yg_')
@@ -50,6 +50,36 @@ map("i", "<C-k>", "<esc>:m .-2<CR>==")
 map("n", "<m-j>", ":m .+1<CR>==")
 map("n", "<m-k>", ":m .-2<CR>==")
 
-vim.cmd('noremap <C-h> :noh<cr>:call clearmatches()<cr>') --clear matches Ctrl + h
+-- Better indenting
+map("v", ">", ">gv")
+map("v", "<", "<gv")
+
+-- Better move between window
+map("n", "<C-h>", "<C-w>h")
+map("n", "<C-j>", "<C-w>j")
+map("n", "<C-k>", "<C-w>k")
+map("n", "<C-l>", "<C-w>l")
+
+-- Clear highlight
+map("n", "<esc><esc>", ":noh<cr>:call clearmatches()<cr>")
+
+-- Tab switch buffer :: REQUIRED?
+map('n', '<TAB>', ':bnext<cr>')
+map('n', '<S-TAB>', ':bprevious<cr>')
+
+-- Better escape, when not using crkbd
+map('i', 'jj', '<esc>')
+map('i', 'jk', '<esc>')
+map('i', 'kj', '<esc>')
+
+-- TAB complete
+-- map('i', '<expr><TAB>', 'pumvisible() ? \\\<C-n>\" : \"\\<TAB>\"')
+
+-- Terminal Window Navigation
+map('t', '<C-h>', '<C-\\><C-N><C-w>h')
+map('t', '<C-j>', '<C-\\><C-N><C-w>j')
+map('t', '<C-k>', '<C-\\><C-N><C-w>k')
+map('t', '<C-l>', '<C-\\><C-N><C-w>l')
+map('t', '<esc>', '<C-\\><C-n>')
 
 -- git
