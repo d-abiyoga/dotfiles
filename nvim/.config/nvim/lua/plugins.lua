@@ -1,98 +1,83 @@
 local present, packer = pcall(require, "plugins.packerInit")
 
-if not present then 
+if not present then
   return false
 end
 
 local use = packer.use
 
-return packer.startup({function()
+return packer.startup({function(use)
   -- Packer
   use {
     'wbthomason/packer.nvim',
     event = 'VimEnter',
-    opt = true
   }
-
-  -- Theme
-  use({
-    'rose-pine/neovim',
-    as = 'rose-pine',
-    config = function()
-        -- Options (see available options below)
-        vim.g.rose_pine_variant = 'moon'
-        vim.g.pine_disable_background = true
-
-        -- Load colorscheme after options
-        vim.cmd('colorscheme rose-pine')
-    end
-  })
+  -- Colorscheme
+  use "rktjmp/lush.nvim"
+  use "morhetz/gruvbox"
+  use "sainnhe/gruvbox-material"
 
   -- Editing enhancements and tools
   -- autopairs
 
 
   -- LSP + syntax
-  use 'neovim/nvim-lspconfig'
+  use {
+    'neovim/nvim-lspconfig',
+    config = function()
+      require('plugins.lspconfig')
+    end,
+  }
   use 'williamboman/nvim-lsp-installer'
-  use { 
+  use {
     'nvim-treesitter/nvim-treesitter',
     run = { ':TSUpdate' }
   }
-
-  -- Completion
-  use { 
-    'hrsh7th/nvim-compe',
-    config = function() require 'plugins.compe' end,
-    disable = true
-  }
-  use 'hrsh7th/nvim-cmp'
+  use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
-  use 'hrsh7th/cmp-nvim-lua'
-  use 'hrsh7th/cmp-nvim-lsp'
-
-  use 'saadparwaiz1/cmp_luasnip'
-  use 'onsails/lspkind-nvim'
-  
-  -- UI + utils
-  use { 
-    'lukas-reineke/indent-blankline.nvim',
-    event = 'BufRead'
+  use 'hrsh7th/cmp-cmdline'
+  use {
+    'hrsh7th/nvim-cmp',
+    config = function()
+      require('plugins.completion')
+    end
+  }
+  use {
+    'glepnir/lspsaga.nvim',
+    config = function()
+      require('plugins.lspsaga')
+    end,
   }
 
+  -- UI + utils
+  use { 'lukas-reineke/indent-blankline.nvim'}
   use { 'kyazdani42/nvim-web-devicons' }
   use {
     'nvim-lualine/lualine.nvim',
-    requires = { 'kyazdani42/nvim-web-devicons', opt = true},
-    config = function() require 'plugins.lualine' end,
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    config = function()
+      require'lualine'.setup {
+          options = {
+            theme = 'gruvbox-material'
+          }
+        }
+    end,
   }
- 
   use {
-    'kyazdani42/nvim-tree.lua',
-    config = function() require('plugins.nvim-tree').config() end,
-    setup = function() require('plugins.nvim-tree').setup() end,
-    wants = 'kyazdani42/nvim-web-devicons',
+    'kyazdani42/nvim-tree.lua' ,
+    module = 'nvim-tree',
+    config = function() require'nvim-tree'.setup {} end
   }
 
-  use { 
+  use {
     'nvim-telescope/telescope.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
-  }
-  
-  use {'glepnir/dashboard-nvim',
-    config = [[require('plugins.dashboard')]] 
-  }
-
-  use {
-    "ahmedkhalf/project.nvim",
     config = function()
-      require("project_nvim").setup {} 
-    end,
-    disable = true
+      require('plugins.telescope').setup()
+    end
   }
 
-  
 end,
 config = {
   display = {

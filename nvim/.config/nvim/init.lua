@@ -1,10 +1,10 @@
 -- init.lua
 -- this is entry file to setting modules located in $XDG_CONFIG_HOME
 local modules = {
-  "opts",
-  "keymap",
+  "options",
+  "keymaps",
   "plugins",
-  "plugins.completion",
+  "color"
 } 
 
 for _, module in ipairs(modules) do
