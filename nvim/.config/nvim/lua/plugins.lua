@@ -6,7 +6,7 @@ end
 
 local use = packer.use
 
-return packer.startup({function(use)
+return packer.startup({function()
   -- Packer
   use {
     'wbthomason/packer.nvim',
@@ -25,7 +25,7 @@ return packer.startup({function(use)
   use {
     'neovim/nvim-lspconfig',
     config = function()
-      require('plugins.lspconfig')
+      require('plugins/lspconfig')
     end,
   }
   use 'williamboman/nvim-lsp-installer'
@@ -39,19 +39,21 @@ return packer.startup({function(use)
   use 'hrsh7th/cmp-cmdline'
   use {
     'hrsh7th/nvim-cmp',
-    config = function()
-      require('plugins.completion')
-    end
+    config = function() require('plugins/completion') end
   }
+  use 'L3MON4D3/LuaSnip'
+  use 'saadparwaiz1/cmp_luasnip'
   use {
     'glepnir/lspsaga.nvim',
-    config = function()
-      require('plugins.lspsaga')
-    end,
+    config = function() require('plugins/lspsaga') end,
   }
 
   -- UI + utils
-  use { 'lukas-reineke/indent-blankline.nvim'}
+  use {
+    'lukas-reineke/indent-blankline.nvim',
+    event = "BufRead",
+    config = function() require('plugins/indent-blankline') end,
+  }
   use { 'kyazdani42/nvim-web-devicons' }
   use {
     'nvim-lualine/lualine.nvim',
@@ -73,9 +75,11 @@ return packer.startup({function(use)
   use {
     'nvim-telescope/telescope.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
-    config = function()
-      require('plugins.telescope').setup()
-    end
+    config = function() require('plugins/telescope') end
+  }
+  use {
+    'glepnir/dashboard-nvim',
+    setup = function() require('plugins/dashboard') end
   }
 
 end,

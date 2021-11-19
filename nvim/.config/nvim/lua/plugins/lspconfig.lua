@@ -1,7 +1,7 @@
 local nvim_lsp = require('lspconfig')
 local protocol = require'vim.lsp.protocol'
 
--- Use an on_attach function to only map the following keys 
+-- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
@@ -79,6 +79,7 @@ end
 local capabilities = require('cmp_nvim_lsp').update_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
+capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 nvim_lsp.flow.setup {
   on_attach = on_attach,
@@ -167,3 +168,11 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 require('plugins/lsp/lua-ls')
 -- require('plugins/lsp/vimls')
 require'lspconfig'.vimls.setup{}
+
+-- css
+require'lspconfig'.cssls.setup{
+  capabilities = capabilities
+}
+
+-- html
+require'lspconfig'.html.setup{}
