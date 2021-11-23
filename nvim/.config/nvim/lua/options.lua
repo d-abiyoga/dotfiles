@@ -32,6 +32,7 @@ vim.o.scrolloff = 4
 vim.o.cursorline = true
 vim.o.background = 'dark'
 vim.o.showcmd = true
+vim.o.listchars ='trail:.'
 -- vim.cmd('colorscheme Tomorrow-Night')
 
 vim.o.showbreak = '↪' --not working yet

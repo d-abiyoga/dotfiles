@@ -1,6 +1,5 @@
 -- indent-blankline character.
 
-require("../user_settings")
 
 indent_blankline_styles = {
     "▏",

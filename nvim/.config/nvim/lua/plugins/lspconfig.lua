@@ -16,7 +16,7 @@ local on_attach = function(client, bufnr)
   -- See `:help vim.lsp.*` for documentation on any of the below functions
   buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  --buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
   --buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
@@ -33,9 +33,9 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 
   -- formatting
-  if client.name == 'tsserver' then
+  --if client.name == 'tsserver' then
     client.resolved_capabilities.document_formatting = true
-  end
+  --end
 
   if client.resolved_capabilities.document_formatting then
     vim.api.nvim_command [[augroup Format]]
@@ -77,14 +77,22 @@ end
 
 -- Set up completion using nvim_cmp with LSP source
 local capabilities = require('cmp_nvim_lsp').update_capabilities(
-  vim.lsp.protocol.make_client_capabilities()
+  protocol.make_client_capabilities()
 )
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-nvim_lsp.flow.setup {
-  on_attach = on_attach,
-  capabilities = capabilities
-}
+local servers = {'vimls', 'html', 'cssls'}
+for _, lsp in ipairs(servers) do 
+  nvim_lsp[lsp].setup {
+    --on_attach = custom_command_attach
+    capabilities = capabilities
+  }
+end
+
+--nvim_lsp.flow.setup {
+--  on_attach = on_attach,
+--  capabilities = capabilities
+--}
 
 nvim_lsp.tsserver.setup {
   on_attach = on_attach,
@@ -129,7 +137,6 @@ nvim_lsp.diagnosticls.setup {
         command = 'eslint_d',
         rootPatterns = { '.git' },
         args = { '--stdin', '--stdin-filename', '%filename', '--fix-to-stdout' },
-        rootPatterns = { '.git' },
       },
       prettier = {
         command = 'prettier_d_slim',
@@ -142,7 +149,6 @@ nvim_lsp.diagnosticls.setup {
       css = 'prettier',
       javascript = 'prettier',
       javascriptreact = 'prettier',
-      json = 'prettier',
       scss = 'prettier',
       less = 'prettier',
       typescript = 'prettier',
@@ -169,10 +175,14 @@ require('plugins/lsp/lua-ls')
 -- require('plugins/lsp/vimls')
 require'lspconfig'.vimls.setup{}
 
+
 -- css
 require'lspconfig'.cssls.setup{
   capabilities = capabilities
 }
 
 -- html
-require'lspconfig'.html.setup{}
+require'lspconfig'.html.setup{
+  capabilities = capabilities
+}
+

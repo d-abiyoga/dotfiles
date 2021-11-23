@@ -19,20 +19,12 @@ return packer.startup({function()
 
   -- Editing enhancements and tools
   -- autopairs
-
+  use {
+    "windwp/nvim-autopairs",
+    config = function() require('nvim-autopairs').setup{} end
+  }
 
   -- LSP + syntax
-  use {
-    'neovim/nvim-lspconfig',
-    config = function()
-      require('plugins/lspconfig')
-    end,
-  }
-  use 'williamboman/nvim-lsp-installer'
-  use {
-    'nvim-treesitter/nvim-treesitter',
-    run = { ':TSUpdate' }
-  }
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
@@ -44,9 +36,24 @@ return packer.startup({function()
   use 'L3MON4D3/LuaSnip'
   use 'saadparwaiz1/cmp_luasnip'
   use {
+    'neovim/nvim-lspconfig',
+    --config = function()
+    --  require('plugins/lspconfig')
+    --end,
+  }
+  use 'williamboman/nvim-lsp-installer'
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = { ':TSUpdate' }
+  }
+  use {
     'glepnir/lspsaga.nvim',
     config = function() require('plugins/lspsaga') end,
   }
+  --use 'mattn/emmet-vim'
+  --use 'JoosepAlviste/nvim-ts-context-commentstring'
+  --use 'terrortylor/nvim-comment'
+  --formatter
 
   -- UI + utils
   use {
@@ -80,6 +87,10 @@ return packer.startup({function()
   use {
     'glepnir/dashboard-nvim',
     setup = function() require('plugins/dashboard') end
+  }
+  use {
+    'norcalli/nvim-colorizer.lua',
+    config = function() require('colorizer').setup() end
   }
 
 end,

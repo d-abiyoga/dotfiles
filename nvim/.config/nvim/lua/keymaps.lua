@@ -58,4 +58,15 @@ map("i", "jk", "<esc>")
 map("i", "kj", "<esc>")
 map("i", "jj", "<esc>")
 
+-- Better Indent
+map("v", "<", "<gv")
+map("v", ">", ">gv")
+
+-- When text is wrapped, move by terminal rows, not lines, unless count is provided
+--vim.cmd('noremap <silent> <expr> j (v:count = 0 ? "gj" : "j")')
+--vim.cmd('noremap <silent> <expr> k (v:count = 0 ? "gk" : "k")')
+
+-- Open file in its default app
+map("n", "<leader>x", "<cmd>!xdg-open %<cr><cr>")
+
 -- git
