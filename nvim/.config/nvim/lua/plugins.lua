@@ -25,26 +25,31 @@ return packer.startup({function()
   }
 
   -- LSP + syntax
+  ---[[
   use 'hrsh7th/cmp-nvim-lsp'
   use 'hrsh7th/cmp-buffer'
   use 'hrsh7th/cmp-path'
   use 'hrsh7th/cmp-cmdline'
   use {
     'hrsh7th/nvim-cmp',
-    config = function() require('plugins/completion') end
+    config = function() require('plugins.cmp') end
   }
   use 'L3MON4D3/LuaSnip'
   use 'saadparwaiz1/cmp_luasnip'
+  --]]
   use {
     'neovim/nvim-lspconfig',
-    --config = function()
-    --  require('plugins/lspconfig')
-    --end,
+  --[[
+    config = function()
+      require('plugins/lspconfig')
+    end,
+  --]]
   }
   use 'williamboman/nvim-lsp-installer'
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = { ':TSUpdate' }
+    run = { ':TSUpdate' },
+    config = function() require('plugins.treesitter') end,
   }
   use {
     'glepnir/lspsaga.nvim',
@@ -54,7 +59,11 @@ return packer.startup({function()
   --use 'JoosepAlviste/nvim-ts-context-commentstring'
   --use 'terrortylor/nvim-comment'
   --formatter
-
+  use {
+    'prettier/vim-prettier',
+    run = 'yarn install',
+    ft = {'javascript', 'html', 'css'},
+  }
   -- UI + utils
   use {
     'lukas-reineke/indent-blankline.nvim',

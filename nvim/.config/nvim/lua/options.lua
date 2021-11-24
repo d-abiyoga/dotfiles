@@ -47,6 +47,7 @@ vim.o.signcolumn = 'yes'
 -- Window
 vim.o.splitbelow = true
 vim.o.splitright = true
+vim.o.hidden = true
 
 -- Commands mode
 vim.o.wildmenu = true

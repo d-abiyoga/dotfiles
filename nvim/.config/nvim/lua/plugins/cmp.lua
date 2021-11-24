@@ -40,8 +40,9 @@ cmp.setup({
   },
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
+    { name = 'treesitter'},
     { name = 'luasnip' },
-  }, {
+    { name = 'path'},
     { name = 'buffer', keyword_length = 5 },
   })
 })
@@ -160,7 +161,7 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 local servers = {'vimls', 'html', 'cssls'}
-for _, lsp in ipairs(servers) do 
+for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     --on_attach = custom_command_attach
     capabilities = capabilities
@@ -175,7 +176,8 @@ end
 nvim_lsp.tsserver.setup {
   on_attach = on_attach,
   filetypes = { "typescript", "typescriptreact", "typescript.tsx", "javascript", "javascriptreact", "javascript.jsx" },
-  capabilities = capabilities
+  capabilities = capabilities,
+  root_dir = nvim_lsp.util.find_node_modules_ancestor(),
 }
 
 nvim_lsp.diagnosticls.setup {

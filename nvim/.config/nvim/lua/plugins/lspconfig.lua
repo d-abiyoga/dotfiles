@@ -85,6 +85,7 @@ local servers = {'vimls', 'html', 'cssls'}
 for _, lsp in ipairs(servers) do 
   nvim_lsp[lsp].setup {
     --on_attach = custom_command_attach
+    on_attach = on_attach,
     capabilities = capabilities
   }
 end
@@ -182,7 +183,7 @@ require'lspconfig'.cssls.setup{
 }
 
 -- html
-require'lspconfig'.html.setup{
-  capabilities = capabilities
-}
+--require'lspconfig'.html.setup{
+--  capabilities = capabilities
+--}
 
