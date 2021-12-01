@@ -23,6 +23,12 @@ return packer.startup({function()
     "windwp/nvim-autopairs",
     config = function() require('nvim-autopairs').setup{} end
   }
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+        require('Comment').setup()
+    end
+  }
 
   -- LSP + syntax
   ---[[
@@ -32,10 +38,11 @@ return packer.startup({function()
   use 'hrsh7th/cmp-cmdline'
   use {
     'hrsh7th/nvim-cmp',
-    config = function() require('plugins.cmp') end
+    --config = function() require('plugins.cmp') end
   }
   use 'L3MON4D3/LuaSnip'
   use 'saadparwaiz1/cmp_luasnip'
+  use "rafamadriz/friendly-snippets"
   --]]
   use {
     'neovim/nvim-lspconfig',
@@ -55,6 +62,7 @@ return packer.startup({function()
     'glepnir/lspsaga.nvim',
     config = function() require('plugins/lspsaga') end,
   }
+  use 'onsails/lspkind-nvim'
   --use 'mattn/emmet-vim'
   --use 'JoosepAlviste/nvim-ts-context-commentstring'
   --use 'terrortylor/nvim-comment'
@@ -68,7 +76,7 @@ return packer.startup({function()
   use {
     'lukas-reineke/indent-blankline.nvim',
     event = "BufRead",
-    config = function() require('plugins/indent-blankline') end,
+    config = function() require('plugins.indent-blankline') end,
   }
   use { 'kyazdani42/nvim-web-devicons' }
   use {
@@ -101,7 +109,6 @@ return packer.startup({function()
     'norcalli/nvim-colorizer.lua',
     config = function() require('colorizer').setup() end
   }
-
 end,
 config = {
   display = {

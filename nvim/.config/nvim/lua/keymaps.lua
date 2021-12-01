@@ -5,7 +5,6 @@ local map = U.map
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-map('n', '<leader>w', ':write<CR>')
 
 -- Open a Quickfix window for the last search.
 map('n', "<leader>?", ":execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>")
@@ -14,25 +13,24 @@ map('n', "<leader>?", ":execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>")
 map('n', 'vv', '<C-w>v')
 map('n', 'ss', '<C-w>s')
 
--- quick open newtr
-map('n', '<leader>pv', ':wincmd v<bar> :Ex <bar> :vertical resize 30<CR>')
+-- Alternate way to save
+map('n', '<leader>w', ':write<CR>')
+map('n', '<C-s>', ':write<CR>')
 
--- PLUGINS
--- LSP
-map('n', 'K', '<cmd>Lspsaga hover_doc<cr>')
-map('i', '<C-k>', '<cmd>Lspsaga hover_doc<cr>')
-map('n', 'gh', '<cmd>Lspsaga lsp_finder<cr>')
-map('n', '<C-e>', '<cmd>Lspsage show_line_diagnostics<CR>')
+-- Alternative way to quit with saving
+map('n', '<C-q>', ':wq!<cr>')
+
+-- Better window movement
 
 
--- Telescope
-map('n', "<leader>fg", "<cmd>Telescope live_grep<cr>")
-map('n', "<leader>fb", "<cmd>Telescope buffers<cr>")
-map('n', "<leader>fh", "<cmd>Telescope help_tags<cr>")
-map("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
+-- Better window resize
+map("n", "<C-Up>", ":resize -2<cr>")
+map("n", "<C-Down>", ":resize +2<cr>")
+map("n", "<C-Right>", ":vertical-resize -2<cr>")
+map("n", "<C-Left>", ":vertical-resize +2<cr>")
 
--- File explorer
-map('n', '<leader>e', '<cmd>NvimTreeToggle<cr>')
+-- Quick open newtr
+-- map('n', '<leader>pv', ':wincmd v<bar> :Ex <bar> :vertical resize 30<CR>')
 
 -- yank to the eol
 map('n', 'Y', 'yg_')
@@ -43,11 +41,13 @@ map('n', 'N', 'Nzzzv')
 -- map('n', 'J', 'mzJ`z')
 
 -- Moving Text
-map("v", "J", ":m '>+1<CR>gv=gv")
-map("v", "K", ":m '<-2<CR>gv=gv")
+map("v", "J", ":m '>+1<CR>gv=gv") --TODO: should it in x or v mode?
+map("v", "K", ":m '<-2<CR>gv=gv") --TODO: should it in x or v mode?
+--map("x", "J", ":m '>+1<CR>gv-gv'") --TODO: should it in x or v mode?
+--map("x", "K", ":m '<-2<CR>gv-gv'") --TODO: should it in x or v mode?
 map("i", "<C-j>", "<esc>:m .+1<CR>==")
 map("i", "<C-k>", "<esc>:m .-2<CR>==")
-map("n", "<m-j>", ":m .+1<CR>==")
+map("n", "<m-j>", "m .+1<CR>==")
 map("n", "<m-k>", ":m .-2<CR>==")
 
 --vim.cmd('noremap <C-h> :noh<cr>:call clearmatches()<cr>') --clear matches Ctrl + h
@@ -69,4 +69,28 @@ map("v", ">", ">gv")
 -- Open file in its default app
 map("n", "<leader>x", "<cmd>!xdg-open %<cr><cr>")
 
+-- formatting for jsonls
+--nnoremap <silent> <leader>f <cmd>lua vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})<CR>
+map("n", "<leader>F", "<cmd>lua vim.lsp.range_formatting({},{0,0},{vim.fn.line('$'),0})<cr>")
+
 -- git
+
+-- Tab switch buffer
+map("n", "<TAB>", ":bnext<cr>")
+map("n", "<S-TAB>", ":bprevious<cr>")
+
+-- PLUGINS
+
+-- File explorer
+map('n', '<leader>e', '<cmd>NvimTreeToggle<cr>')
+-- LSP
+map('n', 'K', '<cmd>Lspsaga hover_doc<cr>')
+map('i', '<C-k>', '<cmd>Lspsaga hover_doc<cr>')
+map('n', 'gh', '<cmd>Lspsaga lsp_finder<cr>')
+map('n', '<C-e>', '<cmd>Lspsage show_line_diagnostics<CR>')
+
+-- Telescope
+map('n', "<leader>fg", "<cmd>Telescope live_grep<cr>")
+map('n', "<leader>fb", "<cmd>Telescope buffers<cr>")
+map('n', "<leader>fh", "<cmd>Telescope help_tags<cr>")
+map("n", "<leader>ff", "<cmd>Telescope find_files<cr>")

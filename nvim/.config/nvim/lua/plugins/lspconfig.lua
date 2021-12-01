@@ -81,8 +81,8 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(
 )
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-local servers = {'vimls', 'html', 'cssls'}
-for _, lsp in ipairs(servers) do 
+local servers = {'vimls', 'html', 'cssls', 'jsonls'}
+for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     --on_attach = custom_command_attach
     on_attach = on_attach,
@@ -173,17 +173,14 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 )
 
 require('plugins/lsp/lua-ls')
--- require('plugins/lsp/vimls')
-require'lspconfig'.vimls.setup{}
 
 
--- css
-require'lspconfig'.cssls.setup{
-  capabilities = capabilities
+require'lspconfig'.jsonls.setup {
+    commands = {
+      Format = {
+        function()
+          vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+        end
+      }
+    }
 }
-
--- html
---require'lspconfig'.html.setup{
---  capabilities = capabilities
---}
-

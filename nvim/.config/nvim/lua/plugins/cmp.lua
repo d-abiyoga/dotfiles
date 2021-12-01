@@ -1,6 +1,7 @@
 vim.cmd[[set completeopt=menu,menuone,noselect]]
 -- Setup nvim-cmp.
 local cmp = require'cmp'
+local lspkind = require'lspkind'
 
 cmp.setup({
   snippet = {
@@ -44,7 +45,32 @@ cmp.setup({
     { name = 'luasnip' },
     { name = 'path'},
     { name = 'buffer', keyword_length = 5 },
-  })
+  }),
+  --[[
+  formatting = {
+    format = lspkind.cmp_format({
+      with_text = true,
+      maxwidth = 50,
+    })
+  }
+  --]]
+formatting = {
+  format = function(entry, vim_item)
+      vim_item.kind = string.format(
+        "%s %s",
+        require('plugins.kind_icons').icons[vim_item.kind],
+        vim_item.kind
+      )
+
+      vim_item.menu = ({
+        nvim_lsp = "[LSP]",
+        nvim_lua = "[Lua]",
+        buffer = "[Buff]",
+      })[entry.source.name]
+
+      return vim_item
+    end
+    },
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
@@ -97,7 +123,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
   buf_set_keymap('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
   buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  --buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+  buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
   buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
   buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
@@ -160,13 +186,17 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(
 )
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
-local servers = {'vimls', 'html', 'cssls'}
+
+-- SERVERS
+local servers = {'vimls', 'html', 'cssls', 'jsonls'}
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup {
     --on_attach = custom_command_attach
     capabilities = capabilities
   }
 end
+
+require('plugins.lsp.lua-ls')
 
 --nvim_lsp.flow.setup {
 --  on_attach = on_attach,
@@ -239,6 +269,17 @@ nvim_lsp.diagnosticls.setup {
   }
 }
 
+require'lspconfig'.jsonls.setup {
+    commands = {
+      Format = {
+        function()
+          vim.lsp.buf.range_formatting({},{0,0},{vim.fn.line("$"),0})
+        end
+      }
+    }
+}
+
+-- SERVERS end
 -- icon
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
@@ -250,19 +291,4 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     }
   }
 )
-
-require('plugins/lsp/lua-ls')
--- require('plugins/lsp/vimls')
-require'lspconfig'.vimls.setup{}
-
-
--- css
-require'lspconfig'.cssls.setup{
-  capabilities = capabilities
-}
-
--- html
-require'lspconfig'.html.setup{
-  capabilities = capabilities
-}
 

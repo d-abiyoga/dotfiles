@@ -1,6 +1,6 @@
 vim.cmd[[
   if has('termguicolors')
-  set termguicolors
+    set termguicolors
   endif
 
   " For dark version.
@@ -10,4 +10,5 @@ vim.cmd[[
   " Available values: 'hard', 'medium'(default), 'soft'
   let g:gruvbox_material_background = 'medium'
       colorscheme gruvbox-material
+  highlight cursorLineNr ctermfg=214 guifg=#fabd2f 
 ]]

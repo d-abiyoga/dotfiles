@@ -4,8 +4,9 @@ local modules = {
   "options",
   "keymaps",
   "plugins",
-  "color"
-} 
+  "color",
+  "plugins.cmp" --TODO: should goes to plugins
+}
 
 for _, module in ipairs(modules) do
   local ok, err = pcall(require, module)
