@@ -1,74 +1,78 @@
 -- SETTINGS
 -- HOME = os.getenv("HOME")
 
--- OPTIONS
--- Basic
-vim.o.encoding = "utf-8"
--- vim.o.backspace = 'indent,eol,start'
-vim.o.history = 1000
--- vim.o.completeopt = 'menuone, noselect'
+local options = {
+  -- Basic
+  encoding = "utf-8",
+  backspace = 'indent,eol,start',
+  history = 1000,
+  --completeopt = 'menuone, noselect' -- breaking
 
-vim.o.syntax = 'on'
-vim.o.compatible = false
-vim.o.mouse = 'a'
-vim.o.title = true
--- vim.o.termguicolors = true
+  syntax = 'on',
+  compatible = false,
+  mouse = 'a',
+  title = true,
+  -- termguicolors = true
 
--- Search
--- vim.o.hlsearch = true
-vim.o.incsearch = true
-vim.o.smartcase = true
-vim.o.ignorecase = true
+  -- Search
+  -- hlsearch = true
+  incsearch = true,
+  smartcase = true,
+  ignorecase = true,
 
---
-vim.o.autoindent = true
-vim.o.shiftwidth = 0
-vim.o.tabstop = 2
-vim.o.expandtab = true
+  --
+  autoindent = true,
+  shiftwidth = 0,
+  tabstop = 2,
+  expandtab = true,
 
--- Visual
-vim.o.cmdheight = 1
-vim.o.scrolloff = 4
-vim.o.cursorline = true
-vim.o.background = 'dark'
-vim.o.showcmd = true
-vim.o.listchars ='trail:.'
--- vim.cmd('colorscheme Tomorrow-Night')
+  -- Visual
+  cmdheight = 1,
+  scrolloff = 4,
+  cursorline = true,
+  background = 'dark',
+  showcmd = true,
+  listchars ='trail:.',
+  -- vim.cmd('colorscheme Tomorrow-Night')
 
-vim.o.showbreak = '↪' --not working yet
+  showbreak = '↪',
 
--- -- Sidebar
-vim.o.number = true
-vim.o.numberwidth = 4
-vim.o.modelines = 0
-vim.o.relativenumber = true
-vim.o.signcolumn = 'yes'
+  -- -- Sidebar
+  number = true,
+  numberwidth = 4,
+  modelines = 0,
+  relativenumber = true,
+  signcolumn = 'yes',
 
--- Window
-vim.o.splitbelow = true
-vim.o.splitright = true
-vim.o.hidden = true
+  -- Window
+  splitbelow = true,
+  splitright = true,
+  hidden = true,
 
--- Commands mode
-vim.o.wildmenu = true
+  -- Commands mode
+  wildmenu = true,
 
--- Clipboard
-vim.o.clipboard = 'unnamedplus'
+  -- Clipboard
+  clipboard = 'unnamedplus',
 
--- Experiment
-vim.o.lazyredraw = true
+  -- Experiment
+  lazyredraw = true,
 
--- Backup files
--- vim.o.backup = true
-vim.o.writebackup = false
-vim.o.swapfile = false
--- vim.o.undodir = HOME .. '/.vim/tmp/undo//' --undo files
--- vim.o.backupdir = HOME .. '/.vim/tmp/backup//' --backup files
--- vim.o.directory = HOME .. '/.vim/tmp/swap//' --swap files
+  -- Backup files
+  -- backup = true
+  writebackup = false,
+  swapfile = false,
+  -- undodir = HOME .. '/.vim/tmp/undo//' --undo files
+  -- backupdir = HOME .. '/.vim/tmp/backup//' --backup files
+  -- directory = HOME .. '/.vim/tmp/swap//' --swap files
+}
 
+for k,v in pairs(options) do
+    vim.opt[k] = v
+end
 
 -- not sure
 -- enable line-wrapping with left and right cursor movement
--- vim.opt.whichwrap:append({ ['<'] = true, ['>'] = true, ['h'] = true, ['l'] = true, ['['] = true, [']'] = true })
+vim.opt.whichwrap:append({ ['<'] = true, ['>'] = true, ['h'] = true, ['l'] = true, ['['] = true, [']'] = true })
 -- add @, -, and $ as keywords for full SCSS support
--- vim.opt.iskeyword:append({ '@-@', '-', '$' })
+vim.opt.iskeyword:append({ '@-@', '-', '$' })
