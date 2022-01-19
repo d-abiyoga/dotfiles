@@ -75,22 +75,20 @@ return packer.startup({function()
   }
   use 'p00f/nvim-ts-rainbow'
   use {
-    'glepnir/lspsaga.nvim',
+    'tami5/lspsaga.nvim',
     config = function() require('plugins.lspsaga') end,
   }
-  use 'onsails/lspkind-nvim'
-  --use 'mattn/emmet-vim'
+  -- use 'onsails/lspkind-nvim'
+  use 'mattn/emmet-vim'
 
   --formatter
-  use {
-    'prettier/vim-prettier',
-    run = 'yarn install',
-    ft = {'javascript', 'html', 'css'},
-  }
-  use {
-    'jose-elias-alvarez/null-ls.nvim',
-    config = function() require('plugins.lsp.null-ls') end
-  }
+  -- use {
+  --   'prettier/vim-prettier',
+  --   run = 'yarn install',
+  --   ft = {'javascript', 'html', 'css'},
+  -- }
+  use 'jose-elias-alvarez/null-ls.nvim'
+  
   -- UI + utils
   use {
     'lukas-reineke/indent-blankline.nvim',

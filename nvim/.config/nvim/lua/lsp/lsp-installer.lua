@@ -5,7 +5,6 @@ end
 
 -- Register a handler that will be called for all installed servers.
 -- Alternatively, you may also register handlers on specific server instances instead
-
 lsp_installer.on_server_ready(function(server)
   local opts = {
     on_attach = require("lsp.handlers").on_attach,
@@ -16,10 +15,25 @@ lsp_installer.on_server_ready(function(server)
     local jsonls_opts = require("lsp.settings.jsonls")
     opts = vim.tbl_deep_extend("force", jsonls_opts, opts)
   end
-  
+
   if server.name == "sumneko_lua" then
     local sumneko_opts = require("lsp.settings.sumneko_lua")
     opts = vim.tbl_deep_extend("force", sumneko_opts, opts)
+  end
+
+  if server.name == "tsserver" then
+    local tsserver_opts = require("lsp.settings.tsserver")
+    opts = vim.tbl_deep_extend("force", tsserver_opts, opts)
+  end
+
+  if server.name == "diagnosticls" then
+    local diagnosticls_opts = require("lsp.settings.diagnosticls")
+    opts = vim.tbl_deep_extend("force", diagnosticls_opts, opts)
+  end
+
+  if server.name == "html" then
+    local html_opts = require("lsp.settings.html")
+    opts = vim.tbl_deep_extend("force", html_opts, opts)
   end
 
   -- This setup() function is exactly the same as lspconfig's setup function.
