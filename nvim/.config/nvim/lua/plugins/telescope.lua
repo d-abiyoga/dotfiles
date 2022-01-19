@@ -1,3 +1,10 @@
+local status_ok, telescope = pcall(require, "telescope")
+if not status_ok then
+  return
+end
+
+telescope.load_extension('media_files')
+
 local actions = require('telescope.actions')
 
 require('telescope').setup{
@@ -10,7 +17,13 @@ require('telescope').setup{
         -- actions.which_key shows the mappings for your picker,
         -- e.g. git_{create, delete, ...}_branch for the git_branches picker
         --["<C-h>"] = "which_key"
-        ['<esc>'] = actions.close
+        ["<C-n>"] = actions.cycle_history_next,
+        ["<C-p>"] = actions.cycle_history_prev,
+
+        -- ['<esc>'] = actions.close,
+        ['<C-c>'] = actions.close,
+
+        ['C-q'] = actions.send_to_qflist + actions.open_qflist,
       }
     },
     file_ignore_patterns = { "node_modules"}
@@ -30,5 +43,10 @@ require('telescope').setup{
     --   etension_config_key = value,
     -- }
     -- please take a look at the readme of the extension you want to configure
+
+    media_files = {
+      filetypes = {"png", "webp", "jpg", "jpeg"},
+      find_cmd = "rg"
+    }
   }
 }

@@ -27,6 +27,7 @@ return packer.startup({function()
     'wbthomason/packer.nvim',
     event = 'VimEnter',
   }
+  use 'nvim-lua/plenary.nvim'
   -- Colorscheme
   use "rktjmp/lush.nvim"
   use "morhetz/gruvbox"
@@ -36,14 +37,13 @@ return packer.startup({function()
   -- autopairs
   use {
     "windwp/nvim-autopairs",
-    config = function() require('nvim-autopairs').setup{} end
+    config = function() require('plugins.autopairs') end,
   }
   use {
     'numToStr/Comment.nvim',
-    config = function()
-        require('Comment').setup()
-    end
+    config = function() require('plugins.comment') end,
   }
+  use 'JoosepAlviste/nvim-ts-context-commentstring'
 
   -- LSP + syntax
   ---[[
@@ -73,19 +73,23 @@ return packer.startup({function()
     run = { ':TSUpdate' },
     config = function() require('plugins.treesitter') end,
   }
+  use 'p00f/nvim-ts-rainbow'
   use {
     'glepnir/lspsaga.nvim',
-    config = function() require('plugins/lspsaga') end,
+    config = function() require('plugins.lspsaga') end,
   }
   use 'onsails/lspkind-nvim'
   --use 'mattn/emmet-vim'
-  --use 'JoosepAlviste/nvim-ts-context-commentstring'
-  --use 'terrortylor/nvim-comment'
+
   --formatter
   use {
     'prettier/vim-prettier',
     run = 'yarn install',
     ft = {'javascript', 'html', 'css'},
+  }
+  use {
+    'jose-elias-alvarez/null-ls.nvim',
+    config = function() require('plugins.lsp.null-ls') end
   }
   -- UI + utils
   use {
@@ -108,21 +112,32 @@ return packer.startup({function()
   use {
     'kyazdani42/nvim-tree.lua' ,
     module = 'nvim-tree',
-    config = function() require'nvim-tree'.setup {} end
+    config = function() require('plugins.nvim-tree') end
   }
+  use {
+    'akinsho/bufferline.nvim',
+    config = function() require('plugins.bufferline') end
+  }
+  use 'moll/vim-bbye'
 
   use {
     'nvim-telescope/telescope.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
-    config = function() require('plugins/telescope') end
+    config = function() require('plugins.telescope') end
   }
+  use 'nvim-telescope/telescope-media-files.nvim'
+
   use {
     'glepnir/dashboard-nvim',
-    setup = function() require('plugins/dashboard') end
+    setup = function() require('plugins.dashboard') end
   }
   use {
     'norcalli/nvim-colorizer.lua',
     config = function() require('colorizer').setup() end
+  }
+
+  use {
+    'lewis6991/gitsigns.nvim',
+    config = function() require('plugins.gitsigns') end
   }
   -- if PACKER_BOOTSTRAP then
   --   require('packer').sync()
