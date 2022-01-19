@@ -33,7 +33,7 @@ local options = {
   background = 'dark',
   showcmd = true,
   listchars ='trail:.',
-  -- vim.cmd('colorscheme Tomorrow-Night')
+  pumheight = 10,
 
   showbreak = '↪',
 

@@ -21,7 +21,10 @@ map('n', '<C-s>', ':write<CR>')
 map('n', '<C-q>', ':wq!<cr>')
 
 -- Better window movement
-
+-- map('n', '<C-h>', '<C-w>h')
+-- map('n', '<C-j>', '<C-w>j')
+-- map('n', '<C-k>', '<C-w>k')
+-- map('n', '<C-l>', '<C-w>l')
 
 -- Better window resize
 map("n", "<C-Up>", ":resize -2<cr>")
@@ -41,16 +44,16 @@ map('n', 'N', 'Nzzzv')
 -- map('n', 'J', 'mzJ`z')
 
 -- Moving Text
-map("v", "J", ":m '>+1<CR>gv=gv") --TODO: should it in x or v mode?
-map("v", "K", ":m '<-2<CR>gv=gv") --TODO: should it in x or v mode?
+map("v", "<m-j>", ":m '>+1<CR>gv=gv") --TODO: should it in x or v mode?
+map("v", "<m-k>", ":m '<-2<CR>gv=gv") --TODO: should it in x or v mode?
 --map("x", "J", ":m '>+1<CR>gv-gv'") --TODO: should it in x or v mode?
 --map("x", "K", ":m '<-2<CR>gv-gv'") --TODO: should it in x or v mode?
-map("i", "<C-j>", "<esc>:m .+1<CR>==")
 map("i", "<C-k>", "<esc>:m .-2<CR>==")
-map("n", "<m-j>", "m .+1<CR>==")
+map("i", "<C-j>", "<esc>:m .+1<CR>==")
+map("n", "<m-j>", ":m .+1<CR>==")
 map("n", "<m-k>", ":m .-2<CR>==")
 
---vim.cmd('noremap <C-h> :noh<cr>:call clearmatches()<cr>') --clear matches Ctrl + h
+-- Clear highlight
 map("n", "<leader>h", ":noh<cr>:call clearmatches()<cr>")
 
 -- Escape
@@ -58,7 +61,7 @@ map("i", "jk", "<esc>")
 map("i", "kj", "<esc>")
 map("i", "jj", "<esc>")
 
--- Better Indent
+-- Better Indent (stay in visual mode during indenting)
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
@@ -75,12 +78,12 @@ map("n", "<leader>F", "<cmd>lua vim.lsp.range_formatting({},{0,0},{vim.fn.line('
 
 -- git
 
--- Tab switch buffer
-map("n", "<TAB>", ":bnext<cr>")
-map("n", "<S-TAB>", ":bprevious<cr>")
+-- Navigate buffer
+map("n", "<S-l>", ":bnext<cr>")
+map("n", "<S-h>", ":bprevious<cr>")
 
--- PLUGINS
 
+-- ===PLUGINS===
 -- File explorer
 map('n', '<leader>e', '<cmd>NvimTreeToggle<cr>')
 -- LSP

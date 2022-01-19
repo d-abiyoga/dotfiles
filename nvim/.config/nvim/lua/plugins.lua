@@ -1,5 +1,20 @@
-local present, packer = pcall(require, "plugins.packerInit")
+-- Autocommand that reloads neovim whenever you save the plugins.lua file
+vim.cmd [[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerSync
+  augroup end
+]]
 
+-- Bootstrap
+-- local fn = vim.fn
+-- local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+-- if fn.empty(fn.glob(install_path)) > 0 then
+--   PACKER_BOOTSTRAP = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+-- end
+
+-- Protected call so we don't error first use
+local present, packer = pcall(require, "plugins.packerInit")
 if not present then
   return false
 end
@@ -41,8 +56,8 @@ return packer.startup({function()
     --config = function() require('plugins.cmp') end
   }
   use 'L3MON4D3/LuaSnip'
+  use 'rafamadriz/friendly-snippets'
   use 'saadparwaiz1/cmp_luasnip'
-  use "rafamadriz/friendly-snippets"
   --]]
   use {
     'neovim/nvim-lspconfig',
@@ -109,11 +124,9 @@ return packer.startup({function()
     'norcalli/nvim-colorizer.lua',
     config = function() require('colorizer').setup() end
   }
-end,
-config = {
-  display = {
-    open_fn = function()
-      return require('packer.util').float({ border= 'single' })
-    end
-  }
-}})
+  -- if PACKER_BOOTSTRAP then
+  --   require('packer').sync()
+  -- end
+end
+})
+
