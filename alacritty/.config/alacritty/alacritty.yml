@@ -63,7 +63,7 @@ env:
   #opacity: 1.0
 
 #opacity: 0.5
-background_opacity: 0.8
+window.opacity: 0.8
 # Startup Mode (changes require restart)
 #
 # Values for `startup_mode`:
