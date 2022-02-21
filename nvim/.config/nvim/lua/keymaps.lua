@@ -56,6 +56,10 @@ map("n", "<m-k>", ":m .-2<CR>==")
 -- Clear highlight
 map("n", "<leader>h", ":noh<cr>:call clearmatches()<cr>")
 
+
+-- Copy all
+map("n", "<C-a>", "ggVG")
+
 -- Escape
 map("i", "jk", "<esc>")
 map("i", "kj", "<esc>")

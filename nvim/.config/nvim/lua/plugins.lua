@@ -160,6 +160,13 @@ return packer.startup({
 				require("plugins.gitsigns")
 			end,
 		})
+
+    use({
+      "akinsho/toggleterm.nvim",
+      config = function()
+        require("plugins.toggleterm")
+      end,
+    })
 		-- if PACKER_BOOTSTRAP then
 		--   require('packer').sync()
 		-- end
