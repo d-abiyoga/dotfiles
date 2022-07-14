@@ -102,3 +102,8 @@ map('n', "<leader>fb", "<cmd>Telescope buffers<cr>")
 map('n', "<leader>fh", "<cmd>Telescope help_tags<cr>")
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
 map("n", "<leader>fm", "<cmd>Telescope media_files<cr>")
+map("n", "<leader>ft", ":TodoTelescope<cr>")
+
+-- GoLang
+map('n', '<leader>gt', ':GoTest<CR>')
+map('n', '<leader>gr', ':GoRun<CR>')
