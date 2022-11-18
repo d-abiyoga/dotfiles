@@ -7,11 +7,14 @@ fi
 
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$HOME/.local/bin/:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/day/.oh-my-zsh"
-
+export ZSH="/Users/spaceman/.oh-my-zsh"
+export PATH=~/.npm-global/bin:$PATH
+export PATH=~/.local/bin:$PATH
+export PATH=~/.script:$PATH
+export PATH="/opt/homebrew/bin:$PATH"
+export PATH=~/go/bin:$PATH
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -42,7 +45,6 @@ ZSH_THEME="spaceship"
 
 # Uncomment the following line if pasting URLs and other text is messed up.
 # DISABLE_MAGIC_FUNCTIONS="true"
-
 # Uncomment the following line to disable colors in ls.
 # DISABLE_LS_COLORS="true"
 
@@ -79,7 +81,14 @@ ZSH_THEME="spaceship"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git zsh-autosuggestions zsh-syntax-highlighting zsh-z)
+plugins=(
+	git
+	tmux
+	zsh-autosuggestions
+	zsh-syntax-highlighting
+    zsh-z
+    fzf
+)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -91,6 +100,7 @@ source $ZSH/oh-my-zsh.sh
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
+
 if [[ -n $SSH_CONNECTION ]]; then
   export EDITOR='vim'
 else
@@ -108,13 +118,46 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias zshconf="vim ~/.zshrc"
+alias vimconf="vim ~/.config/nvim/"
+alias kittyconf="vim ~/.config/kitty/"
+alias v="nvim"
+
+alias reloadzsh="source ~/.zshrc"
 alias ls="exa --icons"
-alias la="exa --icons --long --all"
-alias zshconfig="nvim ~/.zshrc"
-alias zshreload="source ~/.zshrc"
-alias nvimconfig="nvim ~/.config/nvim/"
-alias i3config="nvim ~/.config/i3/"
-alias picomconfig="nvim ~/.config/picom.conf"
+alias la="exa -la --icons"
+alias tree="exa --tree"
+alias ide="~/.script/ide.sh"
+alias doomemacs="emacs --with-profile doom"
+alias lg='lazygit'
+alias luamake=/Users/spaceman/.config/nvim/lua-language-server/3rd/luamake/luamake
+alias cat='bat'
+
+# alias check-log2="
+# echo dev:
+# git log origin/development --oneline  --pretty=format:'%h - %aD (%ar)%d%n  %s - %an' | grep '$(git rev-parse --short HEAD)'
+# echo staging:
+# git log origin/staging --oneline  --pretty=format:'%h - %aD (%ar)%d%n  %s - %an' | grep '$(git rev-parse --short HEAD)'
+# echo master:
+# git log origin/master --oneline  --pretty=format:'%h - %aD (%ar)%d%n  %s - %an' | grep '$(git rev-parse --short HEAD)'"
+
+
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+
+bindkey "\e[1;3D" backward-word # ⌥←
+bindkey "\e[1;3C" forward-word # ⌥→
+
+# from fzf
+[ -f ~/.fzf.sh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --preview '(highlight -O ansi -l {} 2> /dev/null || bat {} || exa --tree {}) 2> /dev/null | head -200'"
+export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || bat {} || exa --tree {}) 2> /dev/null | head -200'"
+export FZF_ALT_C_OPTS="--preview 'exa --tree {} | head -200'"
+export FZF_BASE=/opt/homebrew/bin/fzf
+export FZF_DEFAULT_COMMAND='fd --type f'
+
+bindkey '^X^T' fzf-file-widget
+bindkey '^F' fzf-file-widget
+export PATH=~/.local/bin:"$PATH"

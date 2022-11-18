@@ -1,24 +1,23 @@
 -- Mappings
-local U = require('utils')
+local U = require("utils")
 local map = U.map
 -- Leader key
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-
 -- Open a Quickfix window for the last search.
-map('n', "<leader>?", ":execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>")
+map("n", "<leader>?", ":execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>")
 
 -- Split window
-map('n', 'vv', '<C-w>v')
-map('n', 'ss', '<C-w>s')
+map("n", "vv", "<C-w>v")
+map("n", "ss", "<C-w>s")
 
 -- Alternate way to save
-map('n', '<leader>w', ':write<CR>')
-map('n', '<C-s>', ':write<CR>')
+map("n", "<leader>w", ":write<CR>")
+map("n", "<C-s>", ":write<CR>")
 
 -- Alternative way to quit with saving
-map('n', '<C-q>', ':wq!<cr>')
+map("n", "<C-q>", ":wq!<cr>")
 
 -- Better window movement
 -- map('n', '<C-h>', '<C-w>h')
@@ -36,11 +35,11 @@ map("n", "<C-Left>", ":vertical-resize +2<cr>")
 -- map('n', '<leader>pv', ':wincmd v<bar> :Ex <bar> :vertical resize 30<CR>')
 
 -- yank to the eol
-map('n', 'Y', 'yg_')
+map("n", "Y", "yg_")
 
 -- keep focus on center
-map('n', 'n', 'nzzzv')
-map('n', 'N', 'Nzzzv')
+map("n", "n", "nzzzv")
+map("n", "N", "Nzzzv")
 -- map('n', 'J', 'mzJ`z')
 
 -- Moving Text
@@ -56,9 +55,8 @@ map("n", "<m-k>", ":m .-2<CR>==")
 -- Clear highlight
 map("n", "<leader>h", ":noh<cr>:call clearmatches()<cr>")
 
-
--- Copy all
-map("n", "<C-a>", "ggVG")
+-- Select all
+--[[ map("n", "<C-a>", "ggVG") ]]
 
 -- Escape
 map("i", "jk", "<esc>")
@@ -86,24 +84,23 @@ map("n", "<leader>F", "<cmd>lua vim.lsp.range_formatting({},{0,0},{vim.fn.line('
 map("n", "<S-l>", ":bnext<cr>")
 map("n", "<S-h>", ":bprevious<cr>")
 
-
 -- ===PLUGINS===
 -- File explorer
-map('n', '<leader>e', '<cmd>NvimTreeToggle<cr>')
+map("n", "<leader>e", "<cmd>NvimTreeToggle<cr>")
 -- LSP
-map('n', 'K', '<cmd>Lspsaga hover_doc<cr>')
-map('i', '<C-k>', '<cmd>Lspsaga hover_doc<cr>')
-map('n', 'gh', '<cmd>Lspsaga lsp_finder<cr>')
-map('n', '<C-e>', '<cmd>Lspsage show_line_diagnostics<CR>')
+map("n", "K", "<cmd>Lspsaga hover_doc<cr>")
+map("i", "<C-k>", "<cmd>Lspsaga hover_doc<cr>")
+map("n", "gh", "<cmd>Lspsaga lsp_finder<cr>")
+map("n", "<C-e>", "<cmd>Lspsage show_line_diagnostics<CR>")
 
 -- Telescope
-map('n', "<leader>fg", "<cmd>Telescope live_grep<cr>")
-map('n', "<leader>fb", "<cmd>Telescope buffers<cr>")
-map('n', "<leader>fh", "<cmd>Telescope help_tags<cr>")
+map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
+map("n", "<leader>fb", "<cmd>Telescope buffers<cr>")
+map("n", "<leader>fh", "<cmd>Telescope help_tags<cr>")
 map("n", "<leader>ff", "<cmd>Telescope find_files<cr>")
 map("n", "<leader>fm", "<cmd>Telescope media_files<cr>")
 map("n", "<leader>ft", ":TodoTelescope<cr>")
 
 -- GoLang
-map('n', '<leader>gt', ':GoTest<CR>')
-map('n', '<leader>gr', ':GoRun<CR>')
+map("n", "<leader>gt", ":GoTest<CR>")
+map("n", "<leader>gr", ":GoRun<CR>")

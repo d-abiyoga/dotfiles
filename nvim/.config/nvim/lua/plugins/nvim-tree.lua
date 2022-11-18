@@ -33,7 +33,7 @@ end
 
 local tree_cb = nvim_tree_config.nvim_tree_callback
 
-nvim_tree.setup {
+nvim_tree.setup({
     disable_netrw = true,
     hijack_netrw = true,
     open_on_setup = false,
@@ -73,9 +73,9 @@ nvim_tree.setup {
         mappings = {
             custom_only = false,
             list = {
-                { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
-                { key = "h", cb = tree_cb "close_node" },
-                { key = "v", cb = tree_cb "vsplit" },
+                { key = { "l", "<CR>", "o" }, cb = tree_cb("edit") },
+                { key = "h", cb = tree_cb("close_node") },
+                { key = "v", cb = tree_cb("vsplit") },
             },
         },
         number = false,
@@ -89,18 +89,18 @@ nvim_tree.setup {
     actions = {
         open_file = {
             quit_on_open = false,
-            resize_window = true,
-            window_picker = {
-                enable = true,
-                chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890",
-                exclude = {
-                    filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" },
-                    buftype = { "nofile", "terminal", "help" },
-                },
-            },
+            resize_window = false,
+            --[[ window_picker = { ]]
+            --[[     enable = true, ]]
+            --[[     chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890", ]]
+            --[[     exclude = { ]]
+            --[[         filetype = { "notify", "packer", "qf", "diff", "fugitive", "fugitiveblame" }, ]]
+            --[[         buftype = { "nofile", "terminal", "help" }, ]]
+            --[[     }, ]]
+            --[[ }, ]]
         },
     },
-}
+})
 
 -- show_icons = {
 --   git = 1,
@@ -118,3 +118,4 @@ vim.g.nvim_tree_show_icons = {
 }
 
 vim.g.nvim_tree_root_folder_modifier = ":t"
+--[[ vim.g.nvim_tree.actions.open_file.resize_window = false ]]

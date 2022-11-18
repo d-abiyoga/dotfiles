@@ -4,13 +4,13 @@
 local options = {
     -- Basic
     encoding = "utf-8",
-    backspace = 'indent,eol,start',
+    backspace = "indent,eol,start",
     history = 1000,
     --completeopt = 'menuone, noselect' -- breaking
 
-    syntax = 'on',
+    syntax = "on",
     compatible = false,
-    mouse = 'a',
+    mouse = "a",
     title = true,
     -- termguicolors = true
 
@@ -30,19 +30,19 @@ local options = {
     cmdheight = 1,
     scrolloff = 4,
     cursorline = true,
-    background = 'dark',
+    background = "dark",
     showcmd = true,
-    listchars = 'trail:.',
+    listchars = "trail:.",
     pumheight = 10,
 
-    showbreak = '↪',
+    showbreak = "↪",
 
     -- -- Sidebar
     number = true,
     numberwidth = 4,
     modelines = 0,
     relativenumber = true,
-    signcolumn = 'yes',
+    signcolumn = "yes",
 
     -- Window
     splitbelow = true,
@@ -53,7 +53,7 @@ local options = {
     wildmenu = true,
 
     -- Clipboard
-    clipboard = 'unnamedplus',
+    clipboard = "unnamedplus",
 
     -- Experiment
     lazyredraw = true,
@@ -76,6 +76,6 @@ end
 
 -- not sure
 -- enable line-wrapping with left and right cursor movement
-vim.opt.whichwrap:append({ ['<'] = true, ['>'] = true, ['h'] = true, ['l'] = true, ['['] = true, [']'] = true })
+vim.opt.whichwrap:append({ ["<"] = true, [">"] = true, ["h"] = true, ["l"] = true, ["["] = true, ["]"] = true })
 -- add @, -, and $ as keywords for full SCSS support
-vim.opt.iskeyword:append({ '@-@', '-', '$' })
+vim.opt.iskeyword:append({ "@-@", "-", "$" })
