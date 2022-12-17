@@ -29,11 +29,15 @@ return packer.startup({
             event = "VimEnter",
         })
         use("nvim-lua/plenary.nvim")
+
         -- Colorscheme
         use("rktjmp/lush.nvim")
         use("morhetz/gruvbox")
         use("sainnhe/gruvbox-material")
         use("folke/tokyonight.nvim")
+        use("rebelot/kanagawa.nvim")
+        use("navarasu/onedark.nvim")
+        use("nyoom-engineering/oxocarbon.nvim")
 
         -- Editing enhancements and tools
         -- autopairs
@@ -68,15 +72,12 @@ return packer.startup({
         use({
             "neovim/nvim-lspconfig",
             config = function()
-                require("lspconfig").astro.setup({})
+                require("plugins.lsp")
             end,
-            --[[
-    config = function()
-      require('plugins/lspconfig')
-    end,
-  --]]
         })
         use("williamboman/nvim-lsp-installer")
+        use({ "williamboman/mason.nvim", config = require("mason").setup() })
+        use({ "williamboman/mason-lspconfig.nvim", config = require("mason-lspconfig").setup() })
         use({
             "nvim-treesitter/nvim-treesitter",
             run = { ":TSUpdate" },
@@ -252,6 +253,7 @@ return packer.startup({
         use("theHamsta/nvim-dap-virtual-text")
         use("nvim-telescope/telescope-dap.nvim")
 
+        use("preservim/tagbar")
         use("nathangrigg/vim-beancount")
         -- if PACKER_BOOTSTRAP then
         --   require('packer').sync()

@@ -79,6 +79,8 @@ map("n", "<leader>x", "<cmd>!xdg-open %<cr><cr>")
 map("n", "<leader>F", "<cmd>lua vim.lsp.range_formatting({},{0,0},{vim.fn.line('$'),0})<cr>")
 
 -- git
+map("n", "<leader>ng", "<cmd>Neogit<cr>")
+map("n", "<leader>gb", "<cmd>Git blame<cr>")
 
 -- Navigate buffer
 map("n", "<S-l>", ":bnext<cr>")
@@ -91,7 +93,7 @@ map("n", "<leader>e", "<cmd>NvimTreeToggle<cr>")
 map("n", "K", "<cmd>Lspsaga hover_doc<cr>")
 map("i", "<C-k>", "<cmd>Lspsaga hover_doc<cr>")
 map("n", "gh", "<cmd>Lspsaga lsp_finder<cr>")
-map("n", "<C-e>", "<cmd>Lspsage show_line_diagnostics<CR>")
+map("n", "<C-e>", "<cmd>Lspsaga show_line_diagnostics<CR>")
 
 -- Telescope
 map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")

@@ -12,8 +12,7 @@ vim.cmd([[
     set termguicolors
   endif
 
-  " cursor blinking
   " set guicursor=n:blinkon1
 
-  colorscheme tokyonight-night
+  colorscheme kanagawa
 ]])
