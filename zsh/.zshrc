@@ -16,6 +16,7 @@ export PATH=~/.script:$PATH
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH=~/go/bin:$PATH
 
+
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
@@ -121,17 +122,26 @@ fi
 alias zshconf="vim ~/.zshrc"
 alias vimconf="vim ~/.config/nvim/"
 alias kittyconf="vim ~/.config/kitty/"
+
 alias v="nvim"
 
-alias reloadzsh="source ~/.zshrc"
+# replace some existing programs
+alias cat='bat'
+alias less='bat'
+alias grep='rg'
 alias ls="exa --icons"
 alias la="exa -la --icons"
 alias tree="exa --tree"
+
 alias ide="~/.script/ide.sh"
 alias doomemacs="emacs --with-profile doom"
 alias lg='lazygit'
 alias luamake=/Users/spaceman/.config/nvim/lua-language-server/3rd/luamake/luamake
-alias cat='bat'
+
+
+alias gwls='git worktree list'
+
+alias vzk='cd ~/Dropbox/notes/ && nvim ./index.md'
 
 # alias check-log2="
 # echo dev:
@@ -161,3 +171,20 @@ export FZF_DEFAULT_COMMAND='fd --type f'
 bindkey '^X^T' fzf-file-widget
 bindkey '^F' fzf-file-widget
 export PATH=~/.local/bin:"$PATH"
+
+bindkey '^X^G' gch
+gch() {
+ git checkout $(git branch —l | fzf )
+}
+
+# Golang
+export GOOS=darwin
+export GOARCH=arm64
+
+export ZK_NOTEBOOK_DIR="$HOME/Dropbox/notes/"
+
+# Flutter
+export PATH="$PATH:$HOME/dev/flutter/bin"
+export PATH="$PATH:/Users/spaceman/Library/Android/sdk"
+
+eval "$(rbenv init - zsh)"

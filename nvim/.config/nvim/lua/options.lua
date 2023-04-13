@@ -68,6 +68,8 @@ local options = {
 
     -- global status window
     laststatus = 3,
+
+    fold = syntax,
 }
 
 for k, v in pairs(options) do

@@ -5,7 +5,7 @@ local modules = {
     "keymaps",
     "plugins",
     "color",
-    "plugins.cmp", --TODO: should goes to plugins
+    "plugins.cmp", -- TODO: should goes to plugins
     "lsp",
     "autocommands",
 }

@@ -40,11 +40,14 @@ map("n", "Y", "yg_")
 -- keep focus on center
 map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
--- map('n', 'J', 'mzJ`z')
+
+-- Better vertical movement
+map("n", "<C-u>", "<C-u>zz")
+map("n", "<C-d>", "<C-d>zz")
 
 -- Moving Text
-map("v", "<m-j>", ":m '>+1<CR>gv=gv") --TODO: should it in x or v mode?
-map("v", "<m-k>", ":m '<-2<CR>gv=gv") --TODO: should it in x or v mode?
+map("v", "J", ":m '>+1<CR>gv=gv") --TODO: should it in x or v mode?
+map("v", "K", ":m '<-2<CR>gv=gv") --TODO: should it in x or v mode?
 --map("x", "J", ":m '>+1<CR>gv-gv'") --TODO: should it in x or v mode?
 --map("x", "K", ":m '<-2<CR>gv-gv'") --TODO: should it in x or v mode?
 map("i", "<C-k>", "<esc>:m .-2<CR>==")
@@ -67,9 +70,9 @@ map("i", "jj", "<esc>")
 map("v", "<", "<gv")
 map("v", ">", ">gv")
 
--- When text is wrapped, move by terminal rows, not lines, unless count is provided
---vim.cmd('noremap <silent> <expr> j (v:count = 0 ? "gj" : "j")')
---vim.cmd('noremap <silent> <expr> k (v:count = 0 ? "gk" : "k")')
+-- Remap for dealing with word wrap
+vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Open file in its default app
 map("n", "<leader>x", "<cmd>!xdg-open %<cr><cr>")
@@ -89,11 +92,14 @@ map("n", "<S-h>", ":bprevious<cr>")
 -- ===PLUGINS===
 -- File explorer
 map("n", "<leader>e", "<cmd>NvimTreeToggle<cr>")
+--
+--[[ map("n", "<leader>e", "<cmd>NeoTreeFocusToggle<cr>") ]]
+
 -- LSP
-map("n", "K", "<cmd>Lspsaga hover_doc<cr>")
-map("i", "<C-k>", "<cmd>Lspsaga hover_doc<cr>")
-map("n", "gh", "<cmd>Lspsaga lsp_finder<cr>")
-map("n", "<C-e>", "<cmd>Lspsaga show_line_diagnostics<CR>")
+--[[ map("n", "K", "<cmd>Lspsaga hover_doc<cr>") ]]
+--[[ map("i", "<C-k>", "<cmd>Lspsaga hover_doc<cr>") ]]
+--[[ map("n", "gh", "<cmd>Lspsaga lsp_finder<cr>") ]]
+--[[ map("n", "<C-e>", "<cmd>Lspsaga show_line_diagnostics<CR>") ]]
 
 -- Telescope
 map("n", "<leader>fg", "<cmd>Telescope live_grep<cr>")
@@ -104,5 +110,16 @@ map("n", "<leader>fm", "<cmd>Telescope media_files<cr>")
 map("n", "<leader>ft", ":TodoTelescope<cr>")
 
 -- GoLang
-map("n", "<leader>gt", ":GoTest<CR>")
-map("n", "<leader>gr", ":GoRun<CR>")
+map("n", "<leader>lgt", ":GoTest<CR>")
+map("n", "<leader>lgr", ":GoRun<CR>")
+
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+
+-- Quickfix list
+--
+map("n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>")
+
+-- Git
+map("n", "<leader>gn", "<cmd>Gitsigns next_hunk<CR>")
+map("n", "<leader>gp", "<cmd>Gitsigns prev_hunk<CR>")
+map("n", "<leader>gs", "<cmd>Gitsigns preview_hunk<CR>")
