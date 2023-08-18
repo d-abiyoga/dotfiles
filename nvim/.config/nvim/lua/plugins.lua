@@ -90,6 +90,7 @@ return packer.startup({
          }
 
         use("jose-elias-alvarez/null-ls.nvim")
+        use("jose-elias-alvarez/typescript.nvim")
 
         -- UI + utils
         use({
@@ -126,7 +127,7 @@ return packer.startup({
         use("fatih/vim-go")
         use("tpope/vim-fugitive")
         use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
-        use("TimUntersberger/neogit")
+        use("NeogitOrg/neogit")
         use({
             "folke/todo-comments.nvim",
             require = "nvim-lua/'plenary.nvim",
@@ -166,6 +167,8 @@ return packer.startup({
             require'mind'.setup()
           end
         }
+        use("mfussenegger/nvim-jdtls")
+        use('windwp/nvim-ts-autotag')
 
     end,
 })

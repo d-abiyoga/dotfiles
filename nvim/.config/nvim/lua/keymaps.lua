@@ -123,3 +123,6 @@ map("n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>")
 map("n", "<leader>gn", "<cmd>Gitsigns next_hunk<CR>")
 map("n", "<leader>gp", "<cmd>Gitsigns prev_hunk<CR>")
 map("n", "<leader>gs", "<cmd>Gitsigns preview_hunk<CR>")
+
+-- Prettier
+map("n", "<leader>p", "<cmd>Prettier<cr>")
