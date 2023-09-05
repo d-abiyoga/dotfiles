@@ -126,3 +126,6 @@ map("n", "<leader>gs", "<cmd>Gitsigns preview_hunk<CR>")
 
 -- Prettier
 map("n", "<leader>p", "<cmd>Prettier<cr>")
+
+-- Tagbar
+map("n", "<leader>tb", "<cmd>Tagbar<cr>")
