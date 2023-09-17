@@ -1,0 +1,50 @@
+#!bin/bash
+set -e
+
+echo "Running dotfiles script"
+
+# Paths
+CONFIG_DIR="$HOME/.config/dotfiles"
+DOTFILES_DIR="dotfiles"
+SSH_DIR="$HOME/.ssh"
+
+# Vars
+EMAIL="dimas.abiyoga169@gmail.com"
+
+# Install Ansible
+if ! [ -x "$(command -v ansible)" ]; then
+    yay ansible --noconfirm
+fi
+
+# Generate SSH keys 
+if ! [[ -f "$SSH_DIR/authorized_keys" ]]; then
+    mkdir -p "$SSH_DIR"
+
+    chmod 700 "$SSH_DIR"
+
+    ssh-keygen -b 4096 -t rsa -f "$SSH_DIR/id_rsa" -N "" -C "$EMAIL"
+
+    cat "$SSH_DIR/id_rsa.pub" >> "$SSH_DIR/authorized_keys"
+
+    ssh-add ~/.ssh/id_rsa
+fi
+
+if ! [[ -d $DOTFILES_DIR" ]]; then
+    git clone "https://github.com/d-abiyoga/dotfiles.git" "$DOTFILES_DIR"
+else 
+    git -C "$DOTFILES_DIR" pull
+fi
+
+if [[ -f "$DOTFILES_DIR/requirements.yml" ]]; then
+    cd "$DOTFILES_DIR"
+
+    ansible-galaxy install -r requirements.yml
+fi
+
+cd "$DOTFILES_DIR"
+
+if [[ -f "$DOTFILES_DIR/vault-password.txt" ]]; then
+    ansible-playbook --diff --vault-password-file "$DOTFILES_DIR/vault-password.txt" "$DOTFILES_DIR/ansible/main.yml"
+else
+    ansible-playbook --diff "$DOTFILES_DIR/ansible/main.yml"
+fi

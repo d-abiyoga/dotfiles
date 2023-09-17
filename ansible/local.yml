@@ -1,0 +1,35 @@
+---
+- hosts: localhost
+  connection: local
+  tags: all
+  gather_facts: true
+  become: true
+
+  pre_tasks:
+    - name: pre-run | update package cache (arch)
+      tags: always
+      become: true
+      pacman: update_cache=yes
+      changed_when: false
+      when: ansible_distribution in ["Archlinux"]
+
+    - name: pre-run | update package cache (debian)
+      tags: always
+      pacman: update_cache=yes
+      changed_when: false
+      when: ansible_distribution in ["Debian", "Ubuntu"]
+
+
+  # roles
+- hosts: localhost
+  become: true
+  roles:
+  - base
+
+- hosts: localhost
+  tags: workstation
+  become: true
+  gather_facts: true
+  become_user: day
+  roles: 
+  - workstation

@@ -1,0 +1,42 @@
+- name: Ensure git is installed 
+  become: true
+  package:
+    name: zsh
+    state: present
+
+- name: Install zsh
+  become: true
+  package:
+    name: zsh
+    state: present
+
+# - name: Change shell into zsh
+#   become: true
+#   command: chsh -s /bin/zsh
+
+- name: check oh-my-zsh folder is exist
+  stat: 
+    path: "{{ ansible_user_dir }}/.oh-my-zsh"
+  register: ohmyzsh_folder
+
+- name: Install oh-my-zsh
+  become: true
+  command: $(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)
+  when: not ohmyzsh_folder.stat.exists
+
+- name: Install plugin | zsh-syntax-highlighting
+  git: 
+    repo: https://github.com/zsh-users/zsh-syntax-highlighting
+    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting}}"
+#
+
+- name: Install plugin | zsh-autosuggestions
+  git: 
+    repo: https://github.com/zsh-users/zsh-autosuggestions
+    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+
+
+- name: Install plugin | zsh-z
+  git:
+    repo: https://github.com/agkozak/zsh-z.git
+    dest: "{{ ansible_user_dir }}/.oh-my-zsh/custom/plugins/zsh-z"

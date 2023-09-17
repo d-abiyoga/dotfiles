@@ -1,0 +1,8 @@
+- name: Install with yay
+  kewlfft.aur.aur:
+    use: yay
+    name:
+      - visual-studio-code-bin
+      - postman-bin
+    state: present
+  when: ansible_distribution in ["Archlinux"]

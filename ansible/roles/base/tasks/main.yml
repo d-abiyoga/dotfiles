@@ -1,0 +1,12 @@
+- name: system setup | development packages | install packages
+  tags: dev
+  package:
+    name:
+      - git
+      - htop
+      - stow
+      - bat
+      - ripgrep
+      # - delta
+      - tree
+    state: latest

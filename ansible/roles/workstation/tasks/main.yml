@@ -1,0 +1,15 @@
+- name: Check if the dotfiles folder exist 
+  stat:
+    path: $HOME/dotfiles
+  register: dotfiles_folder
+
+- name: Clone personal dotfiles setup
+  git:
+    repo: https://www.github.com/d-abiyoga/dotfiles.git
+    dest: $HOME/dotfiles
+  when: not dotfiles_folder.stat.exists
+
+- block:
+  - import_tasks: software/all.yml
+  - import_tasks: software/aur.yml
+  - import_tasks: software/zsh.yml

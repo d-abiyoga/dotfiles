@@ -1,0 +1,12 @@
+- name: Install dev packages
+  package:
+    name:
+      - go
+      - docker
+      - dbeaver
+      # - postman-bin
+      - visual-studio-code-bin 
+  when: ansible_distribution in ["Archlinux"]
+
+# - name: Install rust
+#   command: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
