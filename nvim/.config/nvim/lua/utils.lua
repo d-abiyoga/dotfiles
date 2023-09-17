@@ -14,6 +14,14 @@ function U.map(mode, key, result, opts)
   api.nvim_set_keymap(mode, key, result, options)
 end
 
+function U.executable(name)
+  if vim.fn.executable(name) > 0 then
+    return true
+  end
+
+  return false
+end
+
 
 
 return U

@@ -26,9 +26,10 @@ vim.opt.fillchars:append({
 
 -- Load the colorscheme
 vim.cmd([[
-  if has('termguicolors')
-    set termguicolors
-  endif
+  " if has('termguicolors')
+  "   set termguicolors
+  " endif
+  set termguicolors
 
   set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
     \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor

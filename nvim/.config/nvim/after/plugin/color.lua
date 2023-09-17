@@ -1,7 +1,8 @@
 vim.cmd([[
-  if has('termguicolors')
-    set termguicolors
-  endif
+  " if has('termguicolors')
+  "   set termguicolors
+  " endif
+  set termguicolors
 
   highlight Cursor guifg=black guibg=white
 

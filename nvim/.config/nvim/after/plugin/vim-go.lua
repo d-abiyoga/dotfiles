@@ -6,3 +6,4 @@ vim.cmd[[
     let g:go_diagnostics_enabled = 1
     let g:go_diagnostics_level = 1
 ]]
+
