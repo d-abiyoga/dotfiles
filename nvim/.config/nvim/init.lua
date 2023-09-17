@@ -1,10 +1,16 @@
 -- init.lua
 -- this is entry file to setting modules located in $XDG_CONFIG_HOME
+vim.cmd([[
+  if has('termguicolors')
+    set termguicolors
+  endif
+]])
+
 local modules = {
     "options",
     "keymaps",
-    "color",
     "plugins",
+    "color",
     "plugins.cmp", -- TODO: should goes to plugins
     "lsp",
     "autocommands",
