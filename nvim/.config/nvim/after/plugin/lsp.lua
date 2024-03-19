@@ -2,7 +2,7 @@ local lsp = require("lsp-zero")
 
 lsp.preset("recommended")
 
-local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'lua_ls', 'gopls' }
+-- local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'lua_ls', 'gopls'}
 
 -- Ensure the servers above are installed
 --[[ require('mason-lspconfig').setup { ]]
@@ -11,7 +11,7 @@ local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'lua_ls', 'g
 
 lsp.on_attach(function(client, bufnr)
     print("help")
-    local opts = { buffer = bufnr, remap = false }
+    local opts = { buffer = bufnr, remap = false, silent = true }
 
     vim.keymap.set("n", "gd", function()
         vim.lsp.buf.definition()
@@ -33,14 +33,23 @@ lsp.on_attach(function(client, bufnr)
 end)
 
 -- nvim-cmp supports additional completion capabilities
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+-- local capabilities = vim.lsp.protocol.make_client_capabilities()
+-- capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
-for _, lsp in ipairs(servers) do
-  require('lspconfig')[lsp].setup {
-    on_attach = on_attach,
-    capabilities = capabilities,
-  }
-end
+-- for _, lsp in ipairs(servers) do
+--   require('lspconfig')[lsp].setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--   }
+-- end
+
+local lspconfig = require('lspconfig')
+require'lspconfig'.golangci_lint_ls.setup{
+    cmd = {'golangci-lint-langserver'},
+	root_dir = lspconfig.util.root_pattern('.git', 'go.mod'),
+    init_options = {
+            command = { "golangci-lint", "run", "--fast", "--out-format", "json", "--issues-exit-code=1", "--allow-parallel-runners" };
+    }
+}
 
 lsp.setup()

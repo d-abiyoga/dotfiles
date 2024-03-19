@@ -23,7 +23,7 @@ require('zen-mode').setup{
 
 }
 
-local opts = { noremap=true, silent=false }
+local opts = { noremap=true, silent=true }
 -- Create a new note after asking for its title.
 vim.api.nvim_set_keymap("n", "<leader>zn", "<Cmd>ZkNew { title = vim.fn.input('Title:')}<CR>", opts)
 

@@ -6,18 +6,18 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
 -- Open a Quickfix window for the last search.
-map("n", "<leader>?", ":execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>")
+map("n", "<leader>?", ":execute 'vimgrep /'.@/.'/g %'<CR>:copen<CR>", { silent = true })
 
 -- Split window
-map("n", "vv", "<C-w>v")
-map("n", "ss", "<C-w>s")
+map("n", "vv", "<C-w>v", { silent = true})
+map("n", "ss", "<C-w>s", { silent = true})
 
 -- Alternate way to save
-map("n", "<leader>w", ":write<CR>")
-map("n", "<C-s>", ":write<CR>")
+map("n", "<leader>w", ":write<CR>", { silent = true})
+map("n", "<C-s>", ":write<CR>", { silent = true})
 
 -- Alternative way to quit with saving
-map("n", "<C-q>", ":wq!<cr>")
+map("n", "<C-q>", ":wq!<cr>", { silent = true})
 
 -- Better window movement
 -- map('n', '<C-h>', '<C-w>h')
@@ -26,34 +26,34 @@ map("n", "<C-q>", ":wq!<cr>")
 -- map('n', '<C-l>', '<C-w>l')
 
 -- Better window resize
-map("n", "<C-Up>", ":resize -2<cr>")
-map("n", "<C-Down>", ":resize +2<cr>")
-map("n", "<C-Right>", ":vertical-resize -2<cr>")
-map("n", "<C-Left>", ":vertical-resize +2<cr>")
+map("n", "<C-Up>", ":resize -2<cr>", { silent = true})
+map("n", "<C-Down>", ":resize +2<cr>", { silent = true})
+map("n", "<C-Right>", ":vertical-resize -2<cr>", { silent = true})
+map("n", "<C-Left>", ":vertical-resize +2<cr>", { silent = true})
 
 -- Quick open newtr
 -- map('n', '<leader>pv', ':wincmd v<bar> :Ex <bar> :vertical resize 30<CR>')
 
 -- yank to the eol
-map("n", "Y", "yg_")
+map("n", "Y", "yg_", { silent = true})
 
 -- keep focus on center
-map("n", "n", "nzzzv")
-map("n", "N", "Nzzzv")
+map("n", "n", "nzzzv", { silent = true})
+map("n", "N", "Nzzzv", { silent = true})
 
 -- Better vertical movement
-map("n", "<C-u>", "<C-u>zz")
-map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz", { silent = true})
+map("n", "<C-d>", "<C-d>zz", { silent = true})
 
 -- Moving Text
-map("v", "J", ":m '>+1<CR>gv=gv") --TODO: should it in x or v mode?
-map("v", "K", ":m '<-2<CR>gv=gv") --TODO: should it in x or v mode?
+map("v", "J", ":m '>+1<CR>gv=gv", { silent = true}) --TODO: should it in x or v mode?
+map("v", "K", ":m '<-2<CR>gv=gv", { silent = true}) --TODO: should it in x or v mode?
 --map("x", "J", ":m '>+1<CR>gv-gv'") --TODO: should it in x or v mode?
 --map("x", "K", ":m '<-2<CR>gv-gv'") --TODO: should it in x or v mode?
-map("i", "<C-k>", "<esc>:m .-2<CR>==")
-map("i", "<C-j>", "<esc>:m .+1<CR>==")
-map("n", "<m-j>", ":m .+1<CR>==")
-map("n", "<m-k>", ":m .-2<CR>==")
+map("i", "<C-k>", "<esc>:m .-2<CR>==", { silent = true})
+map("i", "<C-j>", "<esc>:m .+1<CR>==", { silent = true})
+map("n", "<m-j>", ":m .+1<CR>==", { silent = true})
+map("n", "<m-k>", ":m .-2<CR>==", { silent = true})
 
 -- Clear highlight
 map("n", "<leader>h", ":noh<cr>:call clearmatches()<cr>")
@@ -113,7 +113,7 @@ map("n", "<leader>ft", ":TodoTelescope<cr>")
 map("n", "<leader>lgt", ":GoTest<CR>")
 map("n", "<leader>lgr", ":GoRun<CR>")
 
-vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>")
+vim.keymap.set("n", "<C-f>", "<cmd>silent !tmux neww tmux-sessionizer<CR>", { silent = true })
 
 -- Quickfix list
 --
@@ -129,3 +129,7 @@ map("n", "<leader>p", "<cmd>Prettier<cr>")
 
 -- Tagbar
 map("n", "<leader>tb", "<cmd>Tagbar<cr>")
+
+-- Codeium
+--[[ map("i", "<C-g>", function () return vim.fn['codeium#Accept']() end) ]]
+vim.keymap.set('i', '<C-g>', function () return vim.fn['codeium#Accept']() end, { expr = true, silent = true })

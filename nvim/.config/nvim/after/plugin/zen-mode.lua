@@ -47,5 +47,5 @@ require('zen-mode').setup{
   end,
 }
 
-vim.keymap.set("n", "<leader>zm","<CMD>ZenMode<cr>", {}) 
+vim.keymap.set("n", "<leader>zm","<CMD>ZenMode<cr>", { silent = true}) 
 

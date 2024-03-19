@@ -1,5 +1,5 @@
 require("nvim-treesitter.configs").setup({
-    ensure_installed = {
+    --[[ ensure_installed = {
         "bash",
         "css",
         "html",
@@ -14,8 +14,18 @@ require("nvim-treesitter.configs").setup({
         "typescript",
         "astro",
         "go",
+        "gomod",
+        "gosum",
+        "java",
+        "jq",
+        "json",
+        "make",
+        "dockerfile",
+        "sql",
+        "yaml",
+        "gitcommit",
         "vim", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-    },
+    }, ]]
     sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
     -- ignore_install = { "javascript" }, -- List of parsers to ignore installing
     highlight = {

@@ -93,10 +93,10 @@ cmp.setup({
         ghost_text = false,
         native_menu = false,
     },
-    confirm_opts = {
+    --[[ confirm_opts = {
         behavior = cmp.ConfirmBehavior.Replace,
         select = false,
-    },
+    }, ]]
 })
 
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
