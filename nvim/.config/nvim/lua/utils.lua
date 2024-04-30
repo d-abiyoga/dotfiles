@@ -8,7 +8,7 @@ function U.map(mode, key, result, opts)
   local options = { noremap = true, silent = true, expr = false }
 
   if opts then
-    options = vim.tbl_extend('keep', opts, options)
+    options = vim.tbl_extend("keep", opts, options)
   end
 
   api.nvim_set_keymap(mode, key, result, options)
@@ -21,7 +21,5 @@ function U.executable(name)
 
   return false
 end
-
-
 
 return U
